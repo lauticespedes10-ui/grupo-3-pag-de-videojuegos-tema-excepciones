@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-RENT PS2 | Retro-Futuristic Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff007f;
+            --neon-blue: #00f3ff;
+            --neon-purple: #9d00ff;
+            --dark-bg: #0d0614;
+            --card-bg: rgba(25, 10, 40, 0.85);
+            --text-glow: 0 0 10px rgba(0, 243, 255, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            background-image: 
+                linear-gradient(rgba(13, 6, 20, 0.85), rgba(13, 6, 20, 0.85)),
+                radial-gradient(circle at 50% 50%, #2a0845 0%, #0d0614 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Retro Grid Background Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent 95%, rgba(255, 0, 127, 0.2) 96%),
+                        linear-gradient(90deg, transparent 95%, rgba(0, 243, 255, 0.2) 96%);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px);
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 400px; }
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem 1.5rem;
+            border-bottom: 2px solid var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            border-left: 4px solid var(--neon-pink);
+            padding-left: 10px;
+            text-shadow: var(--text-glow);
+        }
+
+        /* Catalog Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-purple);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--neon-purple);
+        }
+
+        .game-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .game-genre {
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .select-btn {
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.5rem 1rem;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .select-btn:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Form Layout */
+        .rent-section {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(13, 6, 20, 0.9);
+            border: 1px solid var(--neon-purple);
+            color: #fff;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .price-box {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px dashed var(--neon-blue);
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.4rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin-top: 1.5rem;
+            border-radius: 6px;
+        }
+
+        .price-box span {
+            color: var(--neon-pink);
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        .submit-btn {
+            background: var(--neon-pink);
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            border-radius: 4px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            color: var(--neon-pink);
+            box-shadow: 0 0 25px #fff;
+        }
+
+        /* Emulator Info Banner */
+        .emulator-info {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--neon-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .emulator-info h3 {
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--neon-purple);
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CYBER-RENT PS2</h1>
+        <p class="subtitle">ALQUILER DE CLASSICS DE PLAYSTATION 2 & HUB RETRO-FUTURISTA</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Emulation Info -->
+        <div class="emulator-info">
+            <h3>SISTEMA DE RETRO-COMPATIBILIDAD Y EMULACIÓN</h3>
+            <p>Los títulos de PS2 están disponibles en formato disco original y digitalizado. Para emulación de consolas de 7ma generación posteriores como Xbox 360, recomendamos la ejecución directa mediante <strong>Xenia Canary</strong>.</p>
+        </div>
+
+        <!-- Top 5 PS2 Games -->
+        <h2 class="section-title">TOP 5 JUEGOS MÁS JUGADOS (ÉPOCA PS2)</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/GTASAnAndreascover.jpg" alt="GTA San Andreas">
+                <div class="game-info">
+                    <div class="game-title">GTA: San Andreas</div>
+                    <div class="game-genre">Acción / Mundo Abierto</div>
+                    <button class="select-btn" onclick="selectGame('GTA: San Andreas')">Seleccionar</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/God_of_War_2_cover.jpg" alt="God of War II">
+                <div class="game-info">
+                    <div class="game-title">God of War II</div>
+                    <div class="game-genre">Hack and Slash / Acción</div>
+                    <button class="select-btn" onclick="selectGame('God of War II')">Seleccionar</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/df/Resident_Evil_4_cover.png" alt="Resident Evil 4">
+                <div class="game-info">
+                    <div class="game-title">Resident Evil 4</div>
+                    <div class="game-genre">Survival Horror / Acción</div>
+                    <button class="select-btn" onclick="selectGame('Resident Evil 4')">Seleccionar</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/9c/Dragon_Ball_Z_Budokai_Tenkaichi_3.jpg" alt="DBZ Budokai Tenkaichi 3">
+                <div class="game-info">
+                    <div class="game-title">DBZ: Budokai Tenkaichi 3</div>
+                    <div class="game-genre">Lucha / Anime</div>
+                    <button class="select-btn" onclick="selectGame('DBZ: Budokai Tenkaichi 3')">Seleccionar</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/b3/Shadow_of_the_Colossus_cover.jpg" alt="Shadow of the Colossus">
+                <div class="game-info">
+                    <div class="game-title">Shadow of the Colossus</div>
+                    <div class="game-genre">Aventura / Acción</div>
+                    <button class="select-btn" onclick="selectGame('Shadow of the Colossus')">Seleccionar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rental Form Section -->
+        <h2 class="section-title">RESERVA Y RETIRO EN LOCAL</h2>
+        <div class="rent-section">
+            <form id="rentForm" onsubmit="processBooking(event)">
+                <div class="form-group">
+                    <label for="fullName">Nombre Completo:</label>
+                    <input type="text" id="fullName" required placeholder="Ingresa tu nombre y apellido">
+                </div>
+
+                <div class="form-group">
+                    <label for="dni">DNI / Identificación:</label>
+                    <input type="text" id="dni" required placeholder="Número de documento">
+                </div>
+
+                <div class="form-group">
+                    <label for="selectedGame">Juego Seleccionado:</label>
+                    <select id="selectedGame" required>
+                        <option value="">-- Selecciona un juego --</option>
+                        <option value="GTA: San Andreas">GTA: San Andreas</option>
+                        <option value="God of War II">God of War II</option>
+                        <option value="Resident Evil 4">Resident Evil 4</option>
+                        <option value="DBZ: Budokai Tenkaichi 3">DBZ: Budokai Tenkaichi 3</option>
+                        <option value="Shadow of the Colossus">Shadow of the Colossus</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duración del Alquiler:</label>
+                    <select id="duration" onchange="updatePrice()" required>
+                        <option value="4000">24 Horas (1 Día) - $4.000 ARS</option>
+                        <option value="6000">48 Horas (2 Días) - $6.000 ARS</option>
+                        <option value="9000">72 Horas (3 Días) - $9.000 ARS</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickupDate">Fecha y Hora de Turno (Retiro en Local):</label>
+                    <input type="datetime-local" id="pickupDate" required>
+                </div>
+
+                <div class="price-box">
+                    TOTAL A PAGAR AL RETIRAR: <span id="totalPrice">$4.000 ARS</span>
+                </div>
+
+                <button type="submit" class="submit-btn">CONFIRMAR TURNO Y RESERVA</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CYBER-RENT PS2 SYSTEM | RETRO-FUTURISTIC ENTERTAINMENT HUB</p>
+    </footer>
+
+    <script>
+        function selectGame(gameName) {
+            document.getElementById('selectedGame').value = gameName;
+            document.getElementById('rentForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updatePrice() {
+            const price = document.getElementById('duration').value;
+            document.getElementById('totalPrice').innerText = '$' + parseInt(price).toLocaleString('es-AR') + ' ARS';
+        }
+
+        function processBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('fullName').value;
+            const game = document.getElementById('selectedGame').value;
+            const price = document.getElementById('totalPrice').innerText;
+
+            alert(`¡TURNO CONFIRMADO!\n\nCliente: ${name}\nJuego: ${game}\nTotal: ${price}\n\nTe esperamos en el local con tu DNI.`);
+        }
+    </script>
+</body>
+</html>
